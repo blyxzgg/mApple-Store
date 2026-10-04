@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Вход
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center align-items-center"
+         style="min-height: calc(100vh - 110px);">
+
+        <div class="col-12 col-sm-10 col-md-7 col-lg-5 col-xl-4">
+
+            <div class="bg-white border rounded-4 p-4 p-md-5 shadow-sm">
+
+                <div class="text-center mb-4">
+                    <h1 class="fw-semibold mb-2">
+                        С возвращением
+                    </h1>
+
+                    <p class="text-secondary mb-0">
+                        Войдите в свой аккаунт
+                    </p>
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <button
+                        type="submit"
+                        class="btn btn-dark btn-lg w-100 rounded-3"
+                    >
+                        Войти
+                    </button>
+
+                </form>
+
+                <div class="text-center mt-4">
+                    <span class="text-secondary">
+                        Нет аккаунта?
+                    </span>
+
+                    <a href="{% url 'main:register' %}"
+                       class="text-dark fw-medium text-decoration-none">
+                        Зарегистрироваться
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

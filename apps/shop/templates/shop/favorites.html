@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block title %}
+mApple
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-4 py-lg-5">
+
+    <div class="mb-4 mb-lg-5">
+        <h1 class="display-5 fw-semibold mb-2">
+            Избранное
+        </h1>
+
+        <p class="text-secondary mb-0">
+            Товары, которые вы отметили сердечком.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        {% for favorite in favorites %}
+
+        <div class="col-12 col-sm-6 col-xl-4">
+
+            <div class="product-card h-100 bg-white border rounded-4 overflow-hidden">
+
+                <div class="position-relative bg-light">
+
+                    <img
+                            src="{{ favorite.product.image.url }}"
+                            alt="{{ favorite.product.title }}"
+                            class="w-100 product-image"
+                    >
+
+                    <form method="post" action="{% url 'shop:toggle_favorite' favorite.product.id %}"
+                          class="position-absolute top-0 end-0 m-3">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <button
+                                type="submit"
+                                class="btn btn-light rounded-circle shadow-sm d-flex align-items-center justify-content-center"
+                                style="width: 42px; height: 42px;"
+                                title="Убрать из избранного"
+                        >
+                            <i class="bi bi-heart-fill text-danger"></i>
+                        </button>
+                    </form>
+
+                </div>
+
+                <div class="p-4 d-flex flex-column">
+
+                    <h5 class="fw-semibold mb-2">
+                        {{ favorite.product.title }}
+                    </h5>
+
+                    <p class="text-secondary small mb-3">
+                        {{ favorite.product.mini_descr }}
+                    </p>
+
+                    <div class="mt-auto">
+
+                        <div class="fw-semibold fs-5 mb-3">
+                            {{ favorite.product.price }} $
+                        </div>
+
+                        {% if favorite.product.id in cart_product_ids %}
+
+                        <form method="post" action="{% url 'shop:remove_from_cart_by_product' favorite.product.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button
+                                    type="submit"
+                                    class="btn btn-outline-dark w-100 rounded-3"
+                            >
+                                <i class="bi bi-check-lg me-2"></i>
+                                В корзине
+                            </button>
+                        </form>
+
+                        {% else %}
+
+                        <form method="post" action="{% url 'shop:add_to_cart' favorite.product.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button
+                                    type="submit"
+                                    class="btn btn-dark w-100 rounded-3"
+                            >
+                                <i class="bi bi-bag me-2"></i>
+                                В корзину
+                            </button>
+                        </form>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="col-12">
+
+            <div class="bg-light rounded-4 p-5 text-center">
+
+                <i class="bi bi-heart fs-1 text-secondary"></i>
+
+                <h4 class="fw-semibold mt-3">
+                    В избранном пока пусто
+                </h4>
+
+                <p class="text-secondary mb-0">
+                    Добавляйте товары, нажимая на сердечко в каталоге.
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<style>
+
+    .product-card {
+        cursor: default;
+    }
+
+    .product-image {
+        height: 280px;
+        object-fit: contain;
+        padding: 25px;
+        transition: transform 0.2s ease;
+    }
+
+</style>
+
+{% endblock %}

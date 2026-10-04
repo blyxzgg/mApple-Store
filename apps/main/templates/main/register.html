@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Регистрация
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center align-items-center"
+         style="min-height: calc(100vh - 110px);">
+
+        <div class="col-12 col-sm-10 col-md-7 col-lg-5 col-xl-4">
+
+            <div class="bg-white border rounded-4 p-4 p-md-5 shadow-sm">
+
+                <div class="text-center mb-4">
+                    <h1 class="fw-semibold mb-2">
+                        Создать аккаунт
+                    </h1>
+
+                    <p class="text-secondary mb-0">
+                        Зарегистрируйтесь в mApple Store
+                    </p>
+                </div>
+
+                <form method="post">
+
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <button
+                            type="submit"
+                            class="btn btn-dark btn-lg w-100 rounded-3"
+                    >
+                        Зарегистрироваться
+                    </button>
+
+                </form>
+
+                <div class="text-center mt-4">
+                    <span class="text-secondary">
+                        Уже есть аккаунт?
+                    </span>
+
+                    <a href="{% url 'main:login' %}"
+                       class="text-dark fw-medium text-decoration-none">
+                        Войти
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

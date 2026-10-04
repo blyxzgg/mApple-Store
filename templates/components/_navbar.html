@@ -1,0 +1,144 @@
+<nav class="navbar navbar-expand-lg sticky-top py-3">
+    <div class="container">
+
+        <div class="w-100 d-flex align-items-center justify-content-between px-3 py-2"
+             style="
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(0, 0, 0, 0.08);
+                border-radius: 18px;
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+             ">
+
+            <a href="/" class="text-decoration-none text-dark fw-semibold fs-5">
+                mApple Store
+            </a>
+
+            <button
+                    class="navbar-toggler border-0 shadow-none d-lg-none"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarMenu"
+                    aria-controls="navbarMenu"
+                    aria-expanded="false"
+                    aria-label="Открыть меню">
+                <i class="bi bi-list fs-4"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+
+                <ul class="navbar-nav mx-auto align-items-lg-center gap-lg-1">
+
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-3" href="{% url 'main:home' %}">
+                            Главная
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-3" href="{% url 'shop:home' %}">
+                            iPhone
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-3" href="{% url 'shop:home' %}">
+                            iPad
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-3" href="{% url 'shop:home' %}">
+                            Mac
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-3" href="{% url 'shop:home' %}">
+                            Apple Watch
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-3" href="{% url 'shop:home' %}">
+                            Аксессуары
+                        </a>
+                    </li>
+
+                </ul>
+
+                <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'main:profile' %}"
+                       class="d-flex align-items-center justify-content-center text-dark text-decoration-none rounded-3"
+                       style="width: 40px; height: 40px;"
+                       title="Профиль">
+                        <i class="bi bi-person fs-5"></i>
+                    </a>
+
+                    <a href="{% url 'shop:favorites' %}"
+                       class="position-relative d-flex align-items-center justify-content-center text-dark text-decoration-none rounded-3"
+                       style="width: 40px; height: 40px;"
+                       title="Избранное">
+
+                        <i class="bi bi-heart fs-5"></i>
+
+                    </a>
+
+                    <a href="{% url 'shop:cart' %}"
+                       class="position-relative d-flex align-items-center justify-content-center text-dark text-decoration-none rounded-3"
+                       style="width: 40px; height: 40px;"
+                       title="Корзина">
+
+                        <i class="bi bi-bag fs-5"></i>
+
+                    </a>
+                    {% else %}
+                    <a href="{% url 'main:login' %}"
+                       class="btn btn-sm btn-light rounded-3 px-3">
+                        Войти
+                    </a>
+
+                    <a href="{% url 'main:register' %}"
+                       class="btn btn-sm btn-dark rounded-3 px-3 btn-custom-hover">
+                        Зарегистрироваться
+                    </a>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+
+<style>
+    .navbar .nav-link {
+        color: #555;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .navbar .nav-link:hover {
+        color: #000;
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .navbar a {
+        transition: all 0.2s ease;
+    }
+
+    .navbar .d-flex > a:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-custom-hover:hover {
+        color: #000000 !important;
+        background-color: #ffffff;
+    }
+</style>

@@ -1,0 +1,282 @@
+{% extends 'base.html' %}
+
+{% block title %}
+mApple
+{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-card">
+
+            <div class="row align-items-center justify-content-space-between">
+
+                <div class="col-lg-6">
+
+                    <span class="hero-label">
+                        ORIGINAL APPLE PRODUCTS
+                    </span>
+
+                    <h1 class="hero-title">
+                        Технологии,
+                        <br>
+                        которые хочется
+                        <span>использовать.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        iPhone, iPad, Mac, Apple Watch и аксессуары.
+                        Оригинальная техника Apple в одном месте.
+                    </p>
+
+                    <div class="d-flex flex-wrap gap-3 mt-4">
+
+                        <a href="{% url 'shop:home' %}"
+                           class="btn btn-dark hero-button">
+                            Перейти в магазин
+                            <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+
+                        <a href="{% url 'shop:home' %}"
+                           class="btn hero-secondary-button">
+                            Смотреть категории
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+
+                    <div class="hero-image-wrapper">
+
+                        <div class="hero-glow"></div>
+
+                        {% if banner and banner.image %}
+                        <img
+                                src="{{ banner.image.url }}"
+                                alt="iPhone"
+                                class="hero-image"
+                        >
+                        {% else %}
+                        <p>Изображение не загружено</p>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<style>
+
+    .hero-section {
+        padding: 40px 0 80px;
+    }
+
+    .hero-card {
+        position: relative;
+        overflow: hidden;
+
+        min-height: 560px;
+
+        display: flex;
+        align-items: center;
+
+        background: #f5f5f7;
+
+        border-radius: 32px;
+
+        padding: 70px;
+
+        isolation: isolate;
+    }
+
+    .hero-label {
+        display: inline-block;
+
+        margin-bottom: 20px;
+
+        color: #777;
+
+        font-size: 11px;
+        font-weight: 600;
+
+        letter-spacing: 1.8px;
+    }
+
+    .hero-title {
+        margin: 0;
+
+        color: #111;
+
+        font-size: clamp(42px, 5vw, 72px);
+        font-weight: 600;
+
+        line-height: 1.02;
+        letter-spacing: -3px;
+    }
+
+    .hero-title span {
+        color: #777;
+    }
+
+    .hero-description {
+        max-width: 500px;
+
+        margin-top: 25px;
+        margin-bottom: 0;
+
+        color: #666;
+
+        font-size: 17px;
+        line-height: 1.6;
+    }
+
+    .hero-button {
+        padding: 13px 22px;
+
+        border-radius: 12px;
+
+        font-size: 14px;
+        font-weight: 500;
+
+        transition: all 0.25s ease;
+    }
+
+    .hero-button:hover {
+        transform: translateY(-2px);
+
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .hero-secondary-button {
+        padding: 13px 22px;
+
+        color: #222;
+
+        background: rgba(255, 255, 255, 0.7);
+
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 12px;
+
+        font-size: 14px;
+        font-weight: 500;
+
+        transition: all 0.25s ease;
+    }
+
+    .hero-secondary-button:hover {
+        color: #111;
+
+        background: white;
+
+        transform: translateY(-2px);
+    }
+
+    .hero-image-wrapper {
+        position: relative;
+
+        height: 500px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-image {
+        position: relative;
+        z-index: 2;
+
+        width: 75%;
+        height: 100%;
+
+        object-fit: cover;
+
+        border-radius: 30px;
+
+        transform: rotate(-5deg);
+
+        box-shadow: 30px 30px 70px rgba(0, 0, 0, 0.15);
+
+        transition: transform 0.5s ease;
+    }
+
+    .hero-card:hover .hero-image {
+        transform: rotate(-2deg) scale(1.02);
+    }
+
+    .hero-glow {
+        position: absolute;
+
+        width: 350px;
+        height: 350px;
+
+        background: rgba(255, 255, 255, 0.9);
+
+        border-radius: 50%;
+
+        filter: blur(70px);
+    }
+
+    @media (max-width: 991px) {
+
+        .hero-section {
+            padding-top: 20px;
+        }
+
+        .hero-card {
+            padding: 45px 30px;
+
+            border-radius: 24px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            letter-spacing: -2px;
+        }
+
+        .hero-image-wrapper {
+            height: 400px;
+            margin-top: 40px;
+        }
+
+        .hero-image {
+            width: 65%;
+        }
+    }
+
+
+    @media (max-width: 576px) {
+
+        .hero-card {
+            padding: 35px 22px;
+        }
+
+        .hero-title {
+            font-size: 40px;
+        }
+
+        .hero-description {
+            font-size: 15px;
+        }
+
+        .hero-image-wrapper {
+            height: 330px;
+        }
+
+        .hero-image {
+            width: 80%;
+        }
+
+        .hero-secondary-button {
+            display: none;
+        }
+    }
+</style>
+{% endblock %}
